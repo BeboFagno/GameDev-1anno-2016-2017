@@ -19,8 +19,8 @@ public class PlayerMovement : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		float h = Input.GetAxisRaw ("Horizontal");
-		float v = Input.GetAxisRaw ("Vertical");
+		float h = Input.GetAxis ("Horizontal");
+		float v = Input.GetAxis ("Vertical");
 
 		Move (h, v);
 		Rotate ();
@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
 	{
 		Vector3 movement = new Vector3 (h, 0.0f, v);
 		movement = movement.normalized * speed * Time.deltaTime;
+		movement = transform.TransformDirection (movement);
 		_rg.MovePosition (transform.position + movement);
 	}
 
