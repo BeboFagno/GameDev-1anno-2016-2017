@@ -10,11 +10,14 @@ public class PlayerMovement : MonoBehaviour
 	private Animator _anim;
 	private Rigidbody _rg;
 	private float _camRayLength = 100.0f;
+	public float sensivityX = 7.0f;
 
 	void Awake ()
 	{
 		_anim = GetComponent<Animator> ();
 		_rg = GetComponent<Rigidbody> ();
+
+		Cursor.lockState = CursorLockMode.Locked;
 	}
 
 	void FixedUpdate()
@@ -25,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
 		Move (h, v);
 		Rotate ();
 		Animating (h, v);
+
 	}
 
 	private void Move(float h, float v)
@@ -37,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Rotate()
 	{
+		/*
 		Ray camRay = Camera.main.ScreenPointToRay (Input.mousePosition);
 
 		RaycastHit floorHit;
@@ -49,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
 			Quaternion newRotation = Quaternion.LookRotation (playerToMouse);
 			_rg.MoveRotation (newRotation);
 		}
+		*/
+		transform.Rotate (0, Input.GetAxis ("Mouse X") * sensivityX, 0);
 	}
 
 	private void Animating (float h, float v)
